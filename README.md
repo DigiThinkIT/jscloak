@@ -25,7 +25,7 @@ Exceptions:
    - ExcType [ExcErrMsg]
       - PassGen ['LenTooShort', 'NoAllowedChars']
       - Utils []
-
+   
 utils.js
 - Utils(randomSeed) - optional value to add to random number generator
    - getRandom(min, max)
@@ -35,6 +35,7 @@ utils.js
    - map(lst, f)
    - isStr(str)
    - mergeDict(a, b)
+   
 passgen.js
 - PassGen(minPassLen) - default is 6
    - genPass(length, useCaps, useLows, useNums, useSpecial)
