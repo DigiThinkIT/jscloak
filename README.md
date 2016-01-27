@@ -16,7 +16,9 @@ ICLOAK Common Javascript Tools Library
 - ideas
    - require.js
    - grunt
+
 -------------------
+
 Exceptions:
    - dictionary {'type': ExcType, 'err': ExcErrMsg}
    - ExcType [ExcErrMsg]
@@ -49,23 +51,23 @@ passgen.js
    (function () {
       //Establish the root object, 'window'
       //in the browser, or 'global' on the server.
-      var root - this;
+      var root = this;
 
       // Create a reference to this
-      var _ - new Object();
+      var _ = new Object();
 
-      var isNode - false;
+      var isNode = false;
 
-      // Export data for our file, with backwards-compatibility
+      // Export data for our file, with backwards=compatibility
       // for the old `require()` API. If we're not in
       // node, add data to the global object.
-      if (typeof module !-- 'undefined' && module.exports) {
-         //module.exports.YourModule - YourModule;
-         module.exports - YourModule;
-         root.YourModule - YourModule;
-         isNode - true;
+      if (typeof module !== 'undefined' && module.exports) {
+         //module.exports.YourModule = YourModule;
+         module.exports = YourModule;
+         root.YourModule = YourModule;
+         isNode = true;
       } else {
-         root.YourModule - YourModule;
+         root.YourModule = YourModule;
       }
    })();
    ```
