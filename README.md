@@ -19,6 +19,7 @@ ICLOAK Common Javascript Tools Library
 
 -------------------
 
+
 Exceptions:
    - dictionary {'type': ExcType, 'err': ExcErrMsg}
    - ExcType [ExcErrMsg]
@@ -41,12 +42,13 @@ passgen.js
 
 -------------------
 
+
 - creating new modules:
    - make a new file (with lowercase letters)
    - make an object for your module (CamelCased)
    - add all function to prototype
    - insert the following code at the end of file:
-   ```
+   ```javascript
    //http://stackoverflow.com/questions/4224606/how-to-check-whether-a-script-is-running-under-node-js
    (function () {
       //Establish the root object, 'window'
