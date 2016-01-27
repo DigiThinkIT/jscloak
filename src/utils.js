@@ -51,6 +51,15 @@ function map(lst, f) {
    return ret;
 }
 
+function mergeDict(a, b) {
+   var c = {};
+   for (var key in a)
+      c[key] = a[key];
+   for (var key in b)
+      c[key] = b[key];
+   return c;
+}
+
 function _Utils(randomSeed) {
    if (randomSeed == undefined)
       this.randomSeed = null;
@@ -71,6 +80,7 @@ _Utils.prototype.charRange = charRange;
 _Utils.prototype.filter = filter;
 _Utils.prototype.map = map;
 _Utils.prototype.isStr = isStr;
+_Utils.prototype.mergeDict = mergeDict;
 
 var Utils = new _Utils(); //TODO: we can't pass stuff this way
 

@@ -27,6 +27,7 @@ Utils(randomSeed) = optional value to add to random number generator
    filter(lst, test)
    map(lst, f)
    isStr(str)
+   mergeDict(a, b)
 
 passgen.js
 PassGen(minPassLen) = default is 6

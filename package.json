@@ -1,9 +1,34 @@
 {
-   'name'      : 'jscloak',
-   'version'   : '0.0.1',
-   'main'      : '
-   'license'   : {
-      'type'   : 'LGPLv2.1+',
-      'url'    :  'http://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html'
-   }
+   "name" : "jscloak",
+   "version" : "0.0.3",
+   "files" : "src",
+   "main" : "src/main.js",
+   "files" : ["src/passlist.txt"],
+   "homepage" :  "https://github.com/DigiThinkIT/jscloak",
+   "bin" : {
+      "unittest"  : "unitTests/main.js",
+      "examples"  : "examples/main.js"
+   },
+   "license" : {
+      "type"   : "LGPLv2.1+",
+      "url"    :  "http://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html"
+   },
+   "bugs" : {
+      "email"  : "konstantin@icloak.org",
+      "url"    : "https://github.com/DigiThinkIT/jscloak/issues"
+   },
+   "author" : {
+      "name"   : "icloak",
+      "email"  : "help@icloak.org",
+      "url"    : "https://icloak.me"
+   },
+   "contributers" : [
+      {
+         "name"   : "Konstantin Kowalski",
+         "email"  : "konstantin@icloak.org",
+         "url"    : "http://forty7.guru"
+      },
+      {  "name"   : "Felipe Orellana" },
+      {  "name"   : "John DiPilla" }
+   ]
 }
