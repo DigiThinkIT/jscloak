@@ -1,4 +1,7 @@
 # jscloak
+
+[![Build Status](https://travis-ci.org/KostyaKow/jscloak.svg?branch=master)](https://travis-ci.org/KostyaKow/jscloak)
+
 ICLOAK Common Javascript Tools Lib
 
 npm help json
