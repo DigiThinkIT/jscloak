@@ -97,3 +97,4 @@ var Utils = new _Utils(); //TODO: we can't pass stuff this way
    else
       root.Utils = Utils;
 })();
+

@@ -1,6 +1,8 @@
 # jscloak
 ICLOAK Common Javascript Tools Lib
 
+npm help json
+
 
 use this for style guide:
    http://www.jslint.com/help.html

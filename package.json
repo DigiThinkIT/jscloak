@@ -5,6 +5,10 @@
    "main" : "src/main.js",
    "files" : ["src/passlist.txt"],
    "homepage" :  "https://github.com/DigiThinkIT/jscloak",
+   "dependencies" : {},
+   "scripts" : {
+      "test": "node unitTests/main.js"
+   },
    "bin" : {
       "unittest"  : "unitTests/main.js",
       "examples"  : "examples/main.js"
