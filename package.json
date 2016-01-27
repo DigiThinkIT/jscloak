@@ -1,0 +1,9 @@
+{
+   'name'      : 'jscloak',
+   'version'   : '0.0.1',
+   'main'      : '
+   'license'   : {
+      'type'   : 'LGPLv2.1+',
+      'url'    :  'http://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html'
+   }
+}

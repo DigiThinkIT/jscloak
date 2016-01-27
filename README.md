@@ -9,6 +9,9 @@ ideas
    require.js
    grunt
 
+TODO:
+   npm package name shouldn't be called jscloak but "cloak" sounds weird
+
 ===================
 Exceptions:
    dictionary {'type': ExcType, 'err': ExcErrMsg}

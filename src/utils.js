@@ -9,7 +9,24 @@ function getRandom(min, max) {
 }
 
 function range(start, end, step) {
-
+   if (step == undefined) {
+      if (start <= end)
+         step = 1;
+      else (start > end)
+         step = -1;
+   }
+   console.log(step);
+   var ret = [];
+   var done = false;
+   while (!done) {
+      ret.push(start);
+      start += step;
+      if (step > 0)
+         done = start > end;
+      else
+         done = start < end;
+   }
+   return ret;
 }
 
 function charRange(start, end) {
