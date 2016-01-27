@@ -13,8 +13,8 @@ var cNums = passgen._getPassChars(false, false, true, false);
 var cSpec = passgen._getPassChars(false, false, false, true);
 var cAll  = passgen._getPassChars(true, true, true, true);
 
-assert(cNums == ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
-assert(cSpec == ['#', '$', '%', '^', '&', '*', '(', ')', '-', '='])
+//assert(cNums == ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
+//assert(cSpec == ['#', '$', '%', '^', '&', '*', '(', ')', '-', '='])
 
 //count how many times characters
 //in chars appear in str
