@@ -74,6 +74,24 @@ function isStr(str) {
    return typeof str == 'string' || str instanceof String;
 }
 
+function sameArray(arr1, arr2, shouldSort) {
+   if (!arr1 || !arr2)
+      return false;
+   if (arr1.length != arr2.length)
+      return false;
+
+   if (shouldSort == true) {
+      arr1 = arr1.sort();
+      arr2 = arr2.sort();
+   }
+
+   for (var i = 0; i < arr1.length; i++) {
+      if (arr1[i] != arr2[i])
+         return false;
+   }
+   return true;
+}
+
 _Utils.prototype.getRandom = getRandom;
 _Utils.prototype.range = range;
 _Utils.prototype.charRange = charRange;
@@ -81,6 +99,7 @@ _Utils.prototype.filter = filter;
 _Utils.prototype.map = map;
 _Utils.prototype.isStr = isStr;
 _Utils.prototype.mergeDict = mergeDict;
+_Utils.prototype.sameArray = sameArray;
 
 var Utils = new _Utils(); //TODO: we can't pass stuff this way
 
