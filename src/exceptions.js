@@ -19,20 +19,19 @@ function getErrorFunc(moduleName, errorTypes, autoThrow) {
       if (msg == undefined)
          msg = 'None';
       if (shouldThrow == undefined)
-         shouldThrow == autoThrow;
-      console.log(autoThrow);
+         shouldThrow = autoThrow;
 
       var excDict = {
          'module' : moduleName,
          'err'    : errType,
-         'msg'    : msg
+         'msg'    : msg,
+         'stack'  : stackTrace2()
       }
-
       if (shouldThrow)
-         throw excDict;
+         throw excToStr(excDict);
       else {
          console.log(excToStr(excDict));
-         stackTrace2();
+         //console.log(stackTrace2());
       }
       return excDict;
    }
@@ -41,8 +40,9 @@ function getErrorFunc(moduleName, errorTypes, autoThrow) {
 
 function excToStr(exc) {
    var strMsg = 'jscloak error...';
-   strMsg += _sprintf('module:{%s}; error type:{%s}; msg:{%s}',
-                      exc.module, exc.err, exc.msg);
+   strMsg += _sprintf('module:{%s}; error type:{%s}; msg:{%s}; stack:\n{%s}',
+                      exc.module, exc.err, exc.msg, exc.stack);
+
    return strMsg;
 }
 
@@ -55,13 +55,14 @@ function stackTrace1() {
    return st2(arguments.callee.caller);
 }
 
+//http://stackoverflow.com/questions/6715571/how-to-get-result-of-console-trace-as-string-in-javascript-with-chrome-or-fire
 function stackTrace2() {
-   if (inNode) {
+   if (inNode) { //works on node and probably chrome
       var obj = {};
       Error.captureStackTrace(obj, stackTrace2);
      return obj.stack;
    }
-   else {
+   else { //Should work on firefox
       var err = new Error();
       return err.stack();
    }
