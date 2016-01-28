@@ -13,6 +13,10 @@ ICLOAK Common Javascript Tools Library
    - [ ] Create password generator
    - [ ] Make unit tests
    - [ ] Make examples
+   - [ ] sprintf
+   - [ ] exception system
+   - [ ] foldr/foldl
+   - [ ] interlace
 - ideas
    - require.js
    - grunt
@@ -37,13 +41,21 @@ ICLOAK Common Javascript Tools Library
 
 utils.js
 - Utils(randomSeed) - optional value to add to random number generator
+   - isStr(str)
+   - isArr(arr)
+   - map(lst, f)
+   - filter(lst, test)
+   - foldl(...)
+   - foldr(...)
+   - contains(arr, el)
+   - flatten(arr)
+   - copyArr(arr)
+   - sprintf(format, ...)
+   - ...
    - getRandom(min, max)
    - charRange(start, end)
    - range(start, end, step)
-   - filter(lst, test)
-   - map(lst, f)
    - mergeDict(a, b)
-   - isStr(str)
    - contains(arr, el)
    - sameArray(arr1, arr2, needSort)
    - shuffleArray(arr, noCopy)

@@ -1,7 +1,9 @@
+const _utils_exc = require('../src/_utils_exc.js');
+
+var _sprintf = _utils_exc._sprintf
+var _contains = _utils_exc._contains
 
 var globalErrors = ['BadApiCall', 'UnsupportedSys'];
-
-
 
 function getErrorFunc(moduleName, errorTypes, autoThrow) {
    errorTypes = errorTypes.concat(globalErrors);
@@ -39,8 +41,8 @@ function getErrorFunc(moduleName, errorTypes, autoThrow) {
 
 function excToStr(exc) {
    var strMsg = 'jscloak error...';
-   strMsg += sprintf('module:{%s}; error type:{%s}; msg:{%s}',
-                     exc.module, exc.err, exc.msg);
+   strMsg += _sprintf('module:{%s}; error type:{%s}; msg:{%s}',
+                      exc.module, exc.err, exc.msg);
    return strMsg;
 }
 

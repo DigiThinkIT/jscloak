@@ -16,9 +16,6 @@ function _map(lst, f) {
    return ret;
 }
 
-function _foldl() {}
-function _foldr() {}
-
 function _filter(lst, test) {
    var ret = [];
    for (x in lst) {
@@ -27,6 +24,10 @@ function _filter(lst, test) {
    }
    return ret;
 }
+
+function _foldl() {}
+function _foldr() {}
+
 
 function _contains(arr, el) {
    return _filter(arr, (x) => x == el).length >= 1
@@ -48,7 +49,6 @@ function _copy_array(arr) {
 }
 
 //var _recursive_checker = 0;
-
 function _recursive_split(str, splitters) {
    splitters = _copy_array(splitters);
    //if (_recursive_checker++ > 1000) { console.log('oops'); return; }
@@ -105,24 +105,27 @@ function inNode() {
 
 (function () {
 if (inNode()) {
+   module.exports._isStr = _isStr;
    module.exports._isArr = _isArr;
    module.exports._map = _map;
+   module.exports._filter = _filter;
    module.exports._foldl = _foldl;
    module.exports._foldr = _foldr;
-   module.exports._filter = _filter;
    module.exports._contains = _contains;
    module.exports._flatten = _flatten_rec;
+   module.exports._copy_arr = _copy_array;
    module.exports._sprintf = _sprintf;
 }
 else {
    this._isStr = _isStr;
    this._isArr = _isArr;
    this._map = _map;
+   this._filter = _filter;
    this._foldl = _foldl;
    this._foldr = _foldr;
-   this._filter = _filter;
    this._contains = _contains;
    this._flatten = _flatten_rec;
+   this._copy_arr = _copy_array;
    this._sprintf = _sprintf;
 }
 })();

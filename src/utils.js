@@ -1,7 +1,20 @@
-const exceptions = require('../src/exceptions.js')
+const exceptions = require('../src/exceptions.js');
 
 var moduleErrorTypes = ['BadRange'];
 var throwExc = exceptions.getErrorFunc('Utils', moduleErrorTypes);
+
+
+const _utils_exc = require('../src/_utils_exc.js');
+var isStr = _utils_exc._isStr;
+var isArr = _utils_exc._isArr;
+var map = _utils_exc._map;
+var filter = _utils_exc._filter;
+var foldl = _utils_exc._foldl;
+var foldr = _utils_exc._foldr;
+var contains = _utils_exc._contains;
+var flatten = _utils_exc._flatten;
+var copyArr = _utils_exc._copy_arr;
+var sprintf = _utils_exc._sprintf;
 
 
 function getRandom(min, max) {
@@ -66,22 +79,6 @@ function charRange(start, end) {
    return ret;
 }
 
-/*function filter(lst, test) {
-   var ret = [];
-   for (x in lst) {
-      if (test(lst[x]))
-         ret.push(lst[x]);
-   }
-   return ret;
-}*/
-
-/*function map(lst, f) {
-   var ret = [];
-   for (x in lst)
-      ret.push(f(lst[x]));
-   return ret;
-}*/
-
 function mergeDict(a, b) {
    var c = {};
    for (var key in a)
@@ -89,12 +86,6 @@ function mergeDict(a, b) {
    for (var key in b)
       c[key] = b[key];
    return c;
-}
-
-
-
-function contains(arr, el) {
-   return filter(arr, (x) => x == el).length > 1
 }
 
 function sameArray(arr1, arr2, needSort) {
@@ -143,15 +134,22 @@ function _Utils(randomSeed) {
    }
 }
 
+//this stuff is from helper _utils_exc.js
+_Utils.prototype.isStr = isStr;
+_Utils.prototype.isArr = isArr;
+_Utils.prototype.map = map;
+_Utils.prototype.filter = filter;
+_Utils.prototype.foldl = foldl;
+_Utils.prototype.foldr = foldr;
+_Utils.prototype.contains = contains;
+_Utils.prototype.flatten = flatten;
+_Utils.prototype.copyArr = copy_arr;
+_Utils.prototype.sprintf = sprintf;
+
 _Utils.prototype.getRandom = getRandom;
 _Utils.prototype.range = range;
 _Utils.prototype.charRange = charRange;
-_Utils.prototype.filter = filter;
-_Utils.prototype.map = map;
 _Utils.prototype.mergeDict = mergeDict;
-_Utils.prototype.isStr = isStr;
-_Utils.prototype.isArr = isArr;
-_Utils.prototype.contains = contains;
 _Utils.prototype.sameArray = sameArray;
 _Utils.prototype.shuffleArray = shuffleArray;
 
