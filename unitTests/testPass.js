@@ -34,7 +34,7 @@ function testPass(len, caps, lows, nums, special) {
 }
 
 function testPassGen() {
-   for (var i = 10; i < 20; i++) {
+   for (var i = 10; i < 25; i++) {
       testPass(i, true,  false, false, false);
       testPass(i, false, true,  false, false);
       testPass(i, false, false, true,  false);

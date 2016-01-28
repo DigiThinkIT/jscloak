@@ -1,16 +1,15 @@
 {
    "name" : "jscloak",
-   "version" : "0.0.4",
+   "version" : "0.0.8",
    "files" : "src",
    "main" : "src/main.js",
-   "files" : ["src/passlist.txt"],
+   "files" : ["src/passlist.txt", "src", "unitTests", "examples"],
    "homepage" :  "https://github.com/DigiThinkIT/jscloak",
    "dependencies" : {},
    "scripts" : {
-      "test": "node unitTests/main.js"
+      "test" : "node unitTests/main.js"
    },
    "bin" : {
-      "unittest"  : "unitTests/main.js",
       "examples"  : "examples/main.js"
    },
    "license" : {

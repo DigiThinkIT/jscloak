@@ -1,21 +1,49 @@
+const exceptions = require('../src/exceptions.js')
+
+var moduleErrorTypes = ['BadRange'];
+var throwExc = exceptions.getErrorFunc('Utils', moduleErrorTypes);
+
+
 function getRandom(min, max) {
    //return Math.round((Math.random() * 100000)) % (max + 1)
    var random = Math.random();
    if (this.randomSeed)
       random = (random + this.randomSeed) / 2
    if (min >= max)
-      error('Bad range for random number generator');
+      throwExc('BadRange', 'Bad range for random number generator');
    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function _rangeErrCheck(start, end, step) {
+   if (contains([start, end], undefined))
+      throwExc('BadRange', 'start and end need to be passed');
+
+   if (start == end)
+      console.log('Range called with same start and end')
+   if (step == 0)
+      throwExc('BadApiCall', 'step cannot be 0');
+
+   var badStep = false;
+   if ((end > start) && (step < 1))
+      badStep = true;
+   if ((start > end) && (step > 1))
+      badStep = true;
+   if (badStep) {
+      var loopErrMsg = sprintf('end=%i;start=%i;step=%i;',
+                               end, start, step);
+      loopErrMsg += ' This will cause infinite loop';
+      throwExc('BadRange', loopErrMsg)
+   }
 }
 
 function range(start, end, step) {
    if (step == undefined) {
       if (start <= end)
          step = 1;
-      else (start > end)
+      else if (start > end)
          step = -1;
    }
-   console.log(step);
+   _rangeErrCheck(start, end, step);
    var ret = [];
    var done = false;
    while (!done) {
@@ -30,6 +58,8 @@ function range(start, end, step) {
 }
 
 function charRange(start, end) {
+   if (end >= start)
+      throwExc('BadRange', 'charRange() only works when end > start')
    var ret = [];
    for (var i = start.charCodeAt(); i <= end.charCodeAt(); i++)
       ret.push(String.fromCharCode(i));
@@ -44,6 +74,7 @@ function filter(lst, test) {
    }
    return ret;
 }
+
 function map(lst, f) {
    var ret = [];
    for (x in lst)
@@ -60,21 +91,15 @@ function mergeDict(a, b) {
    return c;
 }
 
-function _Utils(randomSeed) {
-   if (randomSeed == undefined)
-      this.randomSeed = null;
-   else {
-      while (randomSeed > 1)
-         randomSeed /= 10;
-      this.randomSeed = randomSeed;
-   }
-}
-
 function isStr(str) {
    return typeof str == 'string' || str instanceof String;
 }
 
-function sameArray(arr1, arr2, shouldSort) {
+function contains(arr, el) {
+   return filter(arr, (x) => x == el).length > 1
+}
+
+function sameArray(arr1, arr2, needSort) {
    if (!arr1 || !arr2)
       return false;
    if (arr1.length != arr2.length)
@@ -92,14 +117,45 @@ function sameArray(arr1, arr2, shouldSort) {
    return true;
 }
 
+function shuffleArray(arr, noCopy) {
+   if (noCopy == undefined || noCopy == false)
+      arr = arr.slice();
+
+   var len = arr.length;
+   for (var i = 0; i < len-1; i++) {
+      var index = getRandom(i, len-1);
+      var tmp = arr[index];
+      arr[index] = arr[i];
+      arr[i] = tmp;
+   }
+   return arr;
+}
+
+function interlace(a, b) {
+
+}
+
+function _Utils(randomSeed) {
+   if (randomSeed == undefined)
+      this.randomSeed = null;
+   else {
+      while (randomSeed > 1)
+         randomSeed /= 10;
+      this.randomSeed = randomSeed;
+   }
+}
+
 _Utils.prototype.getRandom = getRandom;
 _Utils.prototype.range = range;
 _Utils.prototype.charRange = charRange;
 _Utils.prototype.filter = filter;
 _Utils.prototype.map = map;
-_Utils.prototype.isStr = isStr;
 _Utils.prototype.mergeDict = mergeDict;
+_Utils.prototype.isStr = isStr;
+_Utils.prototype.isArr = isArr;
+_Utils.prototype.contains = contains;
 _Utils.prototype.sameArray = sameArray;
+_Utils.prototype.shuffleArray = shuffleArray;
 
 var Utils = new _Utils(); //TODO: we can't pass stuff this way
 

@@ -1,5 +1,5 @@
-var utils = require('utils.js');
-var passgen = require('passgen.js');
+var utils = require('../src/utils.js');
+var passgen = require('../src/passgen.js');
 
 function _JsCloak() {
    this.utils = utils;

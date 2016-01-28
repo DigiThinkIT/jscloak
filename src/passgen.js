@@ -1,5 +1,9 @@
-
+const exceptions = require('../src/exceptions.js')
 const utils = require('../src/utils.js');
+
+var moduleErrorTypes = ['LenTooShort', 'NoAllowedChars'];
+var throwExc = exceptions.getErrorFunc('Utils', moduleErrorTypes);
+
 
 function genReadablePass() {
 
@@ -8,12 +12,13 @@ function genReadablePass() {
 
 function genPass(length, useCaps, useLows, useNums, useSpecial) {
    if (length < this.minPasLen)
-      throw {'type':'PassGen', 'err':'LenTooShort'};
+      throwExc('LenTooShort');
    if (!(useCaps || useLows || useNums || useSpecial))
-      throw {'type':'PassGen', 'err':'NoAllowedChars'};
+      throwExc('NoAllowedChars');
 
    var passChars = _getPassChars(useCaps, useLows,
                                  useNums, useSpecial);
+
    var pass = [];
    for (i = 0; i < length; i++) {
       var randNum = utils.getRandom(0, passChars.length-1);

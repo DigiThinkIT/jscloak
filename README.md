@@ -20,12 +20,21 @@ ICLOAK Common Javascript Tools Library
 -------------------
 
 
-Exceptions:
-   - dictionary {'type': ExcType, 'err': ExcErrMsg}
-   - ExcType [ExcErrMsg]
-      - PassGen ['LenTooShort', 'NoAllowedChars']
-      - Utils []
-   
+-Exceptions:
+   - Global Error Types => ['BadApiCall', 'UnsupportedSys', 'Other']
+   - dictionary {'module': ModuleName, 'err': ErrType, 'msg': Msg }
+   - ModuleName => [ErrType]
+      - PassGen => ['LenTooShort', 'NoAllowedChars']
+      - Utils   => ['BadRange']
+   - for new modules, add custom errors:
+   - ```var throwError = exceptions.getErrorFunc(ModuleName, moduleErrorTypes, autoThrow)```
+   - usage in module: throwError('Other', 'error details', true)
+   - call it makeError instead of ThrowError if autoThrow is false
+   -exceptions.js
+      - getErrorFunc(moduleName, errorTypes, autoThrow)
+      - excToStr(exc)
+      - stacktrace()
+
 utils.js
 - Utils(randomSeed) - optional value to add to random number generator
    - getRandom(min, max)
@@ -33,9 +42,12 @@ utils.js
    - range(start, end, step)
    - filter(lst, test)
    - map(lst, f)
-   - isStr(str)
    - mergeDict(a, b)
-   
+   - isStr(str)
+   - contains(arr, el)
+   - sameArray(arr1, arr2, needSort)
+   - shuffleArray(arr, noCopy)
+
 passgen.js
 - PassGen(minPassLen) - default is 6
    - genPass(length, useCaps, useLows, useNums, useSpecial)
