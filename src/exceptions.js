@@ -28,7 +28,7 @@ function getErrorFunc(moduleName, errorTypes, autoThrow) {
          'stack'  : stackTrace2()
       }
       if (shouldThrow)
-         throw excToStr(excDict);
+         throw excDict; //excToStr(excDict); //TODO
       else {
          console.log(excToStr(excDict));
          //console.log(stackTrace2());
@@ -45,6 +45,10 @@ function excToStr(exc) {
 
    return strMsg;
 }
+
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack
+//http://www.codeovertones.com/2011/08/how-to-print-stack-trace-anywhere-in.html
+//https://gist.github.com/jay3sh/1158940
 
 //http://stackoverflow.com/questions/591857/how-can-i-get-a-javascript-stack-trace-when-i-throw-an-exception
 function stackTrace1() {

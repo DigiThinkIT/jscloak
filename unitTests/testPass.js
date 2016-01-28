@@ -52,15 +52,18 @@ function testPassGen() {
       assert(countChars(pass, cSpec) > 0);
       assert(countChars(pass, cCaps) > 0);
    }
+   //TODO: varify that it actually
+   //throws and give error if it doesn't
    try {
       testPass(10, false, false, false, false);
    } catch (e) {
-      assert(e.type == 'PassGen' && e.err == 'NoAllowedChars');
+      assert(e.module == 'PassGen' && e.err == 'NoAllowedChars');
    }
    try {
       testPass(5, true, true, true, true);
    } catch (e) {
-      assert(e.type == 'PassGen' && e.err == 'LenTooShort');
+      console.log(e);
+      assert(e.module == 'PassGen' && e.err == 'LenTooShort');
    }
 }
 

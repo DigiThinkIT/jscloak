@@ -12,11 +12,15 @@ ICLOAK Common Javascript Tools Library
    - [x] integrate Travis CI
    - [ ] Create password generator
    - [ ] Make unit tests
+      - [ ] verify that exceptions do get thrown when we expect them
    - [ ] Make examples
-   - [ ] sprintf
-   - [ ] exception system
-   - [ ] foldr/foldl
+   - [x] sprintf
+   - [ ] sprintf argument check
+   - [x] exception system
+      - [ ] if we throw dict, we don't get error printed, but if we throw string, we can't access error members
+   - [x] foldr/foldl
    - [ ] interlace
+   - [ ] IE magic if console doesn't exist
 - ideas
    - require.js
    - grunt
@@ -56,6 +60,7 @@ utils.js
    - mergeDict(a, b)
    - contains(arr, el)
    - sameArray(arr1, arr2, needSort)
+   - repeatArr(arr, num)
    - shuffleArray(arr, noCopy)
    - interlace(a, b)
    - folds(lst, acc, combine) => combine(acc, next)

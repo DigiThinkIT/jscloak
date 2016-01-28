@@ -2,7 +2,7 @@ const exceptions = require('../src/exceptions.js')
 const utils = require('../src/utils.js');
 
 var moduleErrorTypes = ['LenTooShort', 'NoAllowedChars'];
-var throwExc = exceptions.getErrorFunc('Utils', moduleErrorTypes);
+var throwExc = exceptions.getErrorFunc('PassGen', moduleErrorTypes);
 
 
 function genReadablePass() {
@@ -18,36 +18,50 @@ function _genPassErrCheck(length, useCaps, useLows, useNums, useSpecial) {
 
 }
 
+function _debugPrint(useCaps, useLows, useNums, useSpecial) {
+   /*var logMsg = utils.sprintf('useCaps:%s,useLows:%s,useNums:%s,useSpecial:%s,' +
+                              'length:%i,needed length:%i,pass:%s',
+                              useCaps, useLows, useNums, useSpecial, pass.length, len, pass);*/
+   var sprintf = utils.sprintf;
+   var showStr = 'chars allowed: %s';
+   if (useCaps && useLows && useNums && useSpecial)
+      showStr = sprintf(showStr, 'all');
+   else if (useCaps)
+      showStr = sprintf(showStr, 'caps');
+   else if (useLows)
+      showStr = sprintf(showStr, 'lows');
+   else if (useNums)
+      showStr = sprintf(showStr, 'nums');
+   else if (useSpecial)
+      showStr = sprintf(showStr, 'special');
+   return showStr;
+}
+
 function genPass(len, useCaps, useLows, useNums, useSpecial) {
    _genPassErrCheck(len, useCaps, useLows, useNums, useSpecial);
 
-   /*var passChars = _getPassChars(useCaps, useLows,
-                                 useNums, useSpecial);
-
-   var pass = [];
-   for (i = 0; i < len; i++) {
-      var randNum = utils.getRandom(0, passChars.length-1);
-      var newChar = passChars[randNum];
-      pass.push(newChar);
-   }*/
    var numCategories = useCaps + useLows + useNums + useSpecial;
    var numEach = Math.ceil(len / numCategories);
 
    var charsToUse = [];
    var getChars = _getPassChars;
 
-   charsToUse.push(getChars(useCaps, false, false, false));
-   charsToUse.push(getChars(false, useLows, false, false));
-   charsToUse.push(getChars(false, false, useNums, false));
-   charsToUse.push(getChars(false, false, false, useSpecial));
+   //TODO: I don't like this repeats
+   var repeat = utils.repeatArr
+   charsToUse.push(repeat(getChars(useCaps, false, false, false), 10));
+   charsToUse.push(repeat(getChars(false, useLows, false, false), 10));
+   charsToUse.push(repeat(getChars(false, false, useNums, false), 10));
+   charsToUse.push(repeat(getChars(false, false, false, useSpecial), 10));
 
-   charsToUse = utils.filter(charsToUse, (lst) => lst.length != 0)
-   charsToUse = utils.map(charsToUse, (lst) => utils.shuffleArray(lst, true).slice(0, numEach));
-   var pass = utils.fold(charsToUse, [], (acc, next) => acc.concat(next))
-   pass = pass.join('');
+   charsToUse = utils.filter(charsToUse, (lst) => lst.length != 0);
+   charsToUse = utils.map(charsToUse, (lst) => lst.slice(0, numEach));
+   var pass = utils.fold(charsToUse, [], (acc, next) => acc.concat(next));
+   pass = utils.shuffleArray(pass, true).slice(0, len).join('');
 
-   var logMsg = utils.sprintf('useCaps:%s, useLows:%s, useNums:%s, useSpecial:%s, length:%i, pass:%s',
-                              useCaps, useLows, useNums, useSpecial, pass.length, pass);
+   var debug_msg = _debugPrint(useCaps, useLows, useNums, useSpecial);
+   debug_msg = utils.sprintf('%s, needed length: %i, length: %i, pass: %s, num categories: %i',
+                             debug_msg, len, pass.length, pass, numCategories);
+   console.log(debug_msg);
    return pass;
 }
 

@@ -104,6 +104,13 @@ function sameArray(arr1, arr2, needSort) {
    return true;
 }
 
+function repeatArr(arr, num) {
+   var ret = [];
+   for (var i = 0; i < num; i++)
+      ret = ret.concat(arr);
+   return ret;
+}
+
 function shuffleArray(arr, noCopy) {
    if (noCopy == undefined || noCopy == false)
       arr = arr.slice();
@@ -184,6 +191,7 @@ _Utils.prototype.range = range;
 _Utils.prototype.charRange = charRange;
 _Utils.prototype.mergeDict = mergeDict;
 _Utils.prototype.sameArray = sameArray;
+_Utils.prototype.repeatArr = repeatArr;
 _Utils.prototype.shuffleArray = shuffleArray;
 _Utils.prototype.interlace = interlace;
 _Utils.prototype.foldl = foldl;
