@@ -143,7 +143,7 @@ _Utils.prototype.foldl = foldl;
 _Utils.prototype.foldr = foldr;
 _Utils.prototype.contains = contains;
 _Utils.prototype.flatten = flatten;
-_Utils.prototype.copyArr = copy_arr;
+_Utils.prototype.copyArr = copyArr;
 _Utils.prototype.sprintf = sprintf;
 
 _Utils.prototype.getRandom = getRandom;

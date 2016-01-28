@@ -56,8 +56,15 @@ function stackTrace1() {
 }
 
 function stackTrace2() {
-   var err = new Error();
-   return err.stack();
+   if (inNode) {
+      var obj = {};
+      Error.captureStackTrace(obj, stackTrace2);
+     return obj.stack;
+   }
+   else {
+      var err = new Error();
+      return err.stack();
+   }
 }
 
 ////////////////////
