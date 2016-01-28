@@ -31,10 +31,20 @@ function genPass(len, useCaps, useLows, useNums, useSpecial) {
       pass.push(newChar);
    }*/
    var numCategories = 0;
-   if (useCaps) numCategories++;
-   if (useLows) numCategories++;
-   if (useNums) numCategories++;
-   if (useSpecial) numCategories++;
+   if (useCaps) {
+      numCategories++;
+   }
+   if (useLows) {
+      numCategories++;
+
+   }
+   if (useNums) {
+      numCategories++;
+   }
+   if (useSpecial) {
+      numCategories++;
+   }
+
    var numEach = Math.ceil(len / numCategories);
 
    var numCategories = 0;
