@@ -66,21 +66,21 @@ function charRange(start, end) {
    return ret;
 }
 
-function filter(lst, test) {
+/*function filter(lst, test) {
    var ret = [];
    for (x in lst) {
       if (test(lst[x]))
          ret.push(lst[x]);
    }
    return ret;
-}
+}*/
 
-function map(lst, f) {
+/*function map(lst, f) {
    var ret = [];
    for (x in lst)
       ret.push(f(lst[x]));
    return ret;
-}
+}*/
 
 function mergeDict(a, b) {
    var c = {};
@@ -91,9 +91,7 @@ function mergeDict(a, b) {
    return c;
 }
 
-function isStr(str) {
-   return typeof str == 'string' || str instanceof String;
-}
+
 
 function contains(arr, el) {
    return filter(arr, (x) => x == el).length > 1

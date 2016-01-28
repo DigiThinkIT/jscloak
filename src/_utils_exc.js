@@ -1,6 +1,10 @@
 //This stuff should be in utils.js, but it's also used
 //in exceptions.js, and utils relies on exceptions
 
+function _isStr(str) {
+   return typeof str == 'string' || str instanceof String;
+}
+
 function _isArr(arr) {
    return Array.isArray(arr);
 }
@@ -11,6 +15,9 @@ function _map(lst, f) {
       ret.push(f(lst[x]));
    return ret;
 }
+
+function _foldl() {}
+function _foldr() {}
 
 function _filter(lst, test) {
    var ret = [];
@@ -36,9 +43,45 @@ function _flatten_rec(arr) {
    return ret;
 }
 
+
+var _recursive_checker = 0;
 function _recursive_split(str, splitters) {
+   if (_recursive_checker++ > 1000) {
+      console.log('oops');
+      return;
+   }
    var ret = [];
-   //for (s in splitters) {
+
+   if (splitters.length == 0)
+      return ret;
+
+   if (_isStr(str)) {
+      var splitter = splitters.pop();
+      //splitters.forEach((splitter) => {
+      var splitterLen = splitter.length;
+
+      var i = str.indexOf(splitter);
+      while (i != -1) {
+         if (i != 0) {
+            var head = str.slice(0, i);
+            ret.push(_recursive_split(head, splitters));
+         }
+         ret.push(splitter);
+         str = str.slice(i+splitterLen);
+         i = str.indexOf(splitter);
+      }
+      if (str.length != 0) {
+         var tail = _recursive_split(str, splitters);
+         ret.push(tail);
+      }
+   }
+   if (_isArr(str)) {
+      console.log('arr passed');
+      return;
+   }
+
+   //});
+   /*for (s in splitters) {
       var splitter = splitters[0]; //[s]
       var splitted = str.split(splitter);
 
@@ -65,8 +108,8 @@ function _recursive_split(str, splitters) {
 
       //withSplitter = _filter(withSplitter, (word) => word != '');
       //ret = ret.concat(withSplitter);
-   //}
-   //return ret;
+   //} */
+   return ret;
 }
 function _sprintf(format) {
    return _recursive_split(format, ['%s', '%i']);
@@ -84,14 +127,19 @@ function inNode() {
 if (inNode()) {
    module.exports._isArr = _isArr;
    module.exports._map = _map;
+   module.exports._foldl = _foldl;
+   module.exports._foldr = _foldr;
    module.exports._filter = _filter;
    module.exports._contains = _contains;
    module.exports._flatten = _flatten_rec;
    module.exports._sprintf = _sprintf;
 }
 else {
+   this._isStr = _isStr;
    this._isArr = _isArr;
    this._map = _map;
+   this._foldl = _foldl;
+   this._foldr = _foldr;
    this._filter = _filter;
    this._contains = _contains;
    this._flatten = _flatten_rec;

@@ -3,49 +3,6 @@ var globalErrors = ['BadApiCall', 'UnsupportedSys'];
 
 
 
-///we can't import utils because it relies on exceptions
-//so I had to copy filter and contains from utils.js
-function _filter(lst, test) {
-   var ret = [];
-   for (x in lst) {
-      if (test(lst[x]))
-         ret.push(lst[x]);
-   }
-   return ret;
-}
-function _contains(arr, el) {
-   return _filter(arr, (x) => x == el).length > 1
-}
-
-
-function _isArr(arr) {
-   return Array.isArr(arr);
-}
-
-function flatten(arr) {
-   if (!_isArr(arr))
-      return [arr];
-
-   var ret = [];
-   arr.forEach(function (el, i, a) {
-
-   });
-}
-
-function recursiveSplit(str, splitterArr) {
-   splitterArr.
-   for (s in splitterArr) {
-
-   }
-   if (str.split('
-}
-function sprintf(format) {
-
-   for (var i = 0; i < arguments.length; i++) {
-
-   }
-}
-
 function getErrorFunc(moduleName, errorTypes, autoThrow) {
    errorTypes = errorTypes.concat(globalErrors);
 
