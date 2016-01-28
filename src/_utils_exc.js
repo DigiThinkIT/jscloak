@@ -29,7 +29,7 @@ function _filter(lst, test) {
 }
 
 function _contains(arr, el) {
-   return _filter(arr, (x) => x == el).length > 1
+   return _filter(arr, (x) => x == el).length >= 1
 }
 
 function _flatten_rec(arr) {
@@ -43,79 +43,64 @@ function _flatten_rec(arr) {
    return ret;
 }
 
+function _copy_array(arr) {
+   return arr.slice();
+}
 
-var _recursive_checker = 0;
+//var _recursive_checker = 0;
+
 function _recursive_split(str, splitters) {
-   if (_recursive_checker++ > 1000) {
-      console.log('oops');
-      return;
-   }
+   splitters = _copy_array(splitters);
+   //if (_recursive_checker++ > 1000) { console.log('oops'); return; }
    var ret = [];
 
-   if (splitters.length == 0)
-      return ret;
-
-   if (_isStr(str)) {
-      var splitter = splitters.pop();
-      //splitters.forEach((splitter) => {
-      var splitterLen = splitter.length;
-
-      var i = str.indexOf(splitter);
-      while (i != -1) {
-         if (i != 0) {
-            var head = str.slice(0, i);
-            ret.push(_recursive_split(head, splitters));
-         }
-         ret.push(splitter);
-         str = str.slice(i+splitterLen);
-         i = str.indexOf(splitter);
-      }
-      if (str.length != 0) {
-         var tail = _recursive_split(str, splitters);
-         ret.push(tail);
-      }
-   }
-   if (_isArr(str)) {
-      console.log('arr passed');
-      return;
+   if (splitters.length == 0) {
+      if (str.length != 0)
+         return str;
    }
 
-   //});
-   /*for (s in splitters) {
-      var splitter = splitters[0]; //[s]
-      var splitted = str.split(splitter);
+   var splitter = splitters.pop();
+   var splitterLen = splitter.length;
 
-      var lastSplitter = false;
-      if (splitted[splitted.length-1].length == 0) {
-         lastSplitter = true;
-         splitted.pop();
+   var i = str.indexOf(splitter);
+   while (i != -1) {
+      if (i != 0) {
+         var head = str.slice(0, i);
+         ret.push(_recursive_split(head, splitters));
       }
-      var firstSplitter = false;
-      if (splitted[0].length == 0)
-         firstSplitter = true;
-
-      //splitted = _filter(splitted, (word) => word.length > 0);
-      var withSplitter = _map(splitted, (word) => [splitter, word]);
-
-      if (lastSplitter) {
-         withSplitter.push('%s');
-      }
-      if (!firstSplitter)
-         withSplitter[0][0] = '';
-      console.log(withSplitter);
-      //console.log(_flatten_rec(withSplitter));
-      console.log('....');
-
-      //withSplitter = _filter(withSplitter, (word) => word != '');
-      //ret = ret.concat(withSplitter);
-   //} */
+      ret.push(splitter);
+      str = str.slice(i+splitterLen);
+      i = str.indexOf(splitter);
+   }
+   if (str.length != 0) {
+      var tail = _recursive_split(str, splitters);
+      ret.push(tail);
+   }
    return ret;
 }
-function _sprintf(format) {
-   return _recursive_split(format, ['%s', '%i']);
-   /*for (var i = 0; i < arguments.length; i++) {
 
-   }*/
+
+function _sprintf(format) {
+   var formatters = ['%s', '%i'];
+   var splitted = _recursive_split(format, formatters);
+   splitted = _flatten_rec(splitted);
+
+   var j = 0;
+   for (var i = 1; i < arguments.length; i++) {
+      while (j < splitted.length) {
+         if (_contains(formatters, splitted[j])) {
+            break;
+         }
+         console.log('========Start');
+         console.log(formatters + '....' + splitted[j] + '....' + _contains(formatters, splitted[j]));
+         console.log('========End');
+         j++;
+      }
+      //console.log(splitted[j] + '....' + arguments[i]);
+      splitted[j] = arguments[i];
+      j++;
+   }
+   return splitted//.join('');
 }
 
 ////////////////////
