@@ -25,8 +25,6 @@ function _filter(lst, test) {
    return ret;
 }
 
-function _foldl() {}
-function _foldr() {}
 
 
 function _contains(arr, el) {
@@ -109,8 +107,6 @@ if (inNode()) {
    module.exports._isArr = _isArr;
    module.exports._map = _map;
    module.exports._filter = _filter;
-   module.exports._foldl = _foldl;
-   module.exports._foldr = _foldr;
    module.exports._contains = _contains;
    module.exports._flatten = _flatten_rec;
    module.exports._copy_arr = _copy_array;

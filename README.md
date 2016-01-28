@@ -45,8 +45,6 @@ utils.js
    - isArr(arr)
    - map(lst, f)
    - filter(lst, test)
-   - foldl(...)
-   - foldr(...)
    - contains(arr, el)
    - flatten(arr)
    - copyArr(arr)
@@ -59,6 +57,11 @@ utils.js
    - contains(arr, el)
    - sameArray(arr1, arr2, needSort)
    - shuffleArray(arr, noCopy)
+   - interlace(a, b)
+   - folds(lst, acc, combine) => combine(acc, next)
+      - foldl
+      - foldr
+      - fold = foldr
 
 passgen.js
 - PassGen(minPassLen) - default is 6

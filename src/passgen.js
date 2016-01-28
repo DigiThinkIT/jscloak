@@ -30,43 +30,25 @@ function genPass(len, useCaps, useLows, useNums, useSpecial) {
       var newChar = passChars[randNum];
       pass.push(newChar);
    }*/
-   var numCategories = 0;
-   if (useCaps) {
-      numCategories++;
-   }
-   if (useLows) {
-      numCategories++;
-
-   }
-   if (useNums) {
-      numCategories++;
-   }
-   if (useSpecial) {
-      numCategories++;
-   }
-
+   var numCategories = useCaps + useLows + useNums + useSpecial;
    var numEach = Math.ceil(len / numCategories);
-
-   var numCategories = 0;
-
 
    var charsToUse = [];
    var getChars = _getPassChars;
 
-   if (useCaps)
-      charsToUse.push(getChars(useCaps, false, false, false));
-   if (useLows)
-      charsToUse.push(getChars(false, useLows, false, false));
-   if (useNums)
-      charsToUse.push(getChars(false, false, useNums, false));
-   if (useSpecial)
-      charsToUse.push(getChars(false, false, false, useSpecial));
+   charsToUse.push(getChars(useCaps, false, false, false));
+   charsToUse.push(getChars(false, useLows, false, false));
+   charsToUse.push(getChars(false, false, useNums, false));
+   charsToUse.push(getChars(false, false, false, useSpecial));
 
-      numCategories++;
+   charsToUse = utils.filter(charsToUse, (lst) => lst.length != 0)
+   charsToUse = utils.map(charsToUse, (lst) => utils.shuffleArray(lst, true).slice(0, numEach));
+   var pass = utils.fold(charsToUse, [], (acc, next) => acc.concat(next))
+   pass = pass.join('');
 
-
-   var
-   return pass.join('');
+   var logMsg = utils.sprintf('useCaps:%s, useLows:%s, useNums:%s, useSpecial:%s, length:%i, pass:%s',
+                              useCaps, useLows, useNums, useSpecial, pass.length, pass);
+   return pass;
 }
 
 function _getPassChars(useCaps, useLows, useNums, useSpecial) {

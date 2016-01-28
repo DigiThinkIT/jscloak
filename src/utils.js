@@ -9,8 +9,6 @@ var isStr = _utils_exc._isStr;
 var isArr = _utils_exc._isArr;
 var map = _utils_exc._map;
 var filter = _utils_exc._filter;
-var foldl = _utils_exc._foldl;
-var foldr = _utils_exc._foldr;
 var contains = _utils_exc._contains;
 var flatten = _utils_exc._flatten;
 var copyArr = _utils_exc._copy_arr;
@@ -124,6 +122,43 @@ function interlace(a, b) {
    //TODO
 }
 
+/* Never use foldr_rec. foldl_rec is ok with tail optimization
+ * which doesn't yet work in javascript
+ * fold(l/r) combine combina(acc, next)
+ * foldl_rec combine(init, next), foldr_rec combine(acc, next)
+ * > u.foldr([1, 2, 3], 0, (init, next) => init + next)
+ *    6
+ * > u.foldl([1, 2, 3], [], (init, next) => init.concat([next]))
+ *    [ 3, 2, 1 ]
+ * > u.foldr([1, 2, 3], [], (init, next) => init.concat([next]))
+ *    [ 1, 2, 3 ]
+ */
+function foldr(lst, acc, combine) {
+   for (var i = 0; i < lst.length; i++)
+      acc = combine(acc, lst[i]);
+   return acc;
+}
+function foldl(lst, acc, combine) {
+   for (var i = lst.length-1; i >= 0; i--)
+      acc = combine(acc, lst[i]);
+   return acc;
+}
+var fold = foldr;
+
+function foldl_rec(lst, initial, combine) {
+   if (lst.length == 0)
+      return initial;
+   var next = lst.pop();
+   return foldl(lst, combine(initial, next), combine);
+}
+function foldr_rec(lst, accumulator, combine) {
+   if (lst.length == 0)
+      return accumulator;
+   var next = lst.pop();
+   return combine(foldr(lst, accumulator, combine), next);
+}
+
+
 function _Utils(randomSeed) {
    if (randomSeed == undefined)
       this.randomSeed = null;
@@ -139,8 +174,6 @@ _Utils.prototype.isStr = isStr;
 _Utils.prototype.isArr = isArr;
 _Utils.prototype.map = map;
 _Utils.prototype.filter = filter;
-_Utils.prototype.foldl = foldl;
-_Utils.prototype.foldr = foldr;
 _Utils.prototype.contains = contains;
 _Utils.prototype.flatten = flatten;
 _Utils.prototype.copyArr = copyArr;
@@ -152,6 +185,10 @@ _Utils.prototype.charRange = charRange;
 _Utils.prototype.mergeDict = mergeDict;
 _Utils.prototype.sameArray = sameArray;
 _Utils.prototype.shuffleArray = shuffleArray;
+_Utils.prototype.interlace = interlace;
+_Utils.prototype.foldl = foldl;
+_Utils.prototype.foldr = foldr;
+_Utils.prototype.fold = fold;
 
 var Utils = new _Utils(); //TODO: we can't pass stuff this way
 
