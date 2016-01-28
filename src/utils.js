@@ -71,7 +71,7 @@ function range(start, end, step) {
 }
 
 function charRange(start, end) {
-   if (end >= start)
+   if (end <= start)
       throwExc('BadRange', 'charRange() only works when end > start')
    var ret = [];
    for (var i = start.charCodeAt(); i <= end.charCodeAt(); i++)
@@ -94,7 +94,7 @@ function sameArray(arr1, arr2, needSort) {
    if (arr1.length != arr2.length)
       return false;
 
-   if (shouldSort == true) {
+   if (needSort != undefined && needSort == true) {
       arr1 = arr1.sort();
       arr2 = arr2.sort();
    }
@@ -121,7 +121,7 @@ function shuffleArray(arr, noCopy) {
 }
 
 function interlace(a, b) {
-
+   //TODO
 }
 
 function _Utils(randomSeed) {

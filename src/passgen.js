@@ -10,21 +10,52 @@ function genReadablePass() {
 }
 
 
-function genPass(length, useCaps, useLows, useNums, useSpecial) {
+function _genPassErrCheck(length, useCaps, useLows, useNums, useSpecial) {
    if (length < this.minPasLen)
       throwExc('LenTooShort');
    if (!(useCaps || useLows || useNums || useSpecial))
       throwExc('NoAllowedChars');
 
-   var passChars = _getPassChars(useCaps, useLows,
+}
+
+function genPass(len, useCaps, useLows, useNums, useSpecial) {
+   _genPassErrCheck(len, useCaps, useLows, useNums, useSpecial);
+
+   /*var passChars = _getPassChars(useCaps, useLows,
                                  useNums, useSpecial);
 
    var pass = [];
-   for (i = 0; i < length; i++) {
+   for (i = 0; i < len; i++) {
       var randNum = utils.getRandom(0, passChars.length-1);
       var newChar = passChars[randNum];
       pass.push(newChar);
-   }
+   }*/
+   var numCategories = 0;
+   if (useCaps) numCategories++;
+   if (useLows) numCategories++;
+   if (useNums) numCategories++;
+   if (useSpecial) numCategories++;
+   var numEach = Math.ceil(len / numCategories);
+
+   var numCategories = 0;
+
+
+   var charsToUse = [];
+   var getChars = _getPassChars;
+
+   if (useCaps)
+      charsToUse.push(getChars(useCaps, false, false, false));
+   if (useLows)
+      charsToUse.push(getChars(false, useLows, false, false));
+   if (useNums)
+      charsToUse.push(getChars(false, false, useNums, false));
+   if (useSpecial)
+      charsToUse.push(getChars(false, false, false, useSpecial));
+
+      numCategories++;
+
+
+   var
    return pass.join('');
 }
 
