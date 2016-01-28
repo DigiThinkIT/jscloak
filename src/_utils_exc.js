@@ -86,21 +86,16 @@ function _sprintf(format) {
    splitted = _flatten_rec(splitted);
 
    var j = 0;
-   for (var i = 1; i < arguments.length; i++) {
+   for (var i = 1; i < arguments.length && j < splitted.length-1; i++) {
       while (j < splitted.length) {
-         if (_contains(formatters, splitted[j])) {
+         if (_contains(formatters, splitted[j]))
             break;
-         }
-         console.log('========Start');
-         console.log(formatters + '....' + splitted[j] + '....' + _contains(formatters, splitted[j]));
-         console.log('========End');
          j++;
       }
-      //console.log(splitted[j] + '....' + arguments[i]);
       splitted[j] = arguments[i];
       j++;
    }
-   return splitted//.join('');
+   return splitted.join('');
 }
 
 ////////////////////
