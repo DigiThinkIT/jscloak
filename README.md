@@ -21,6 +21,7 @@ ICLOAK Common Javascript Tools Library
    - [x] foldr/foldl
    - [ ] interlace
    - [ ] IE magic if console doesn't exist
+	- [ ] Add strict
 - ideas
    - require.js
    - grunt
@@ -32,7 +33,7 @@ ICLOAK Common Javascript Tools Library
    - Global Error Types => ['BadApiCall', 'UnsupportedSys', 'Other']
    - dictionary {'module': ModuleName, 'err': ErrType, 'msg': Msg }
    - ModuleName => [ErrType]
-      - PassGen => ['LenTooShort', 'NoAllowedChars']
+      - PassGen => ['LenTooShort', 'NoAllowedChars', 'CHBSBadDict', 'CHBSPassLen']
       - Utils   => ['BadRange']
    - for new modules, add custom errors:
    - ```var throwError = exceptions.getErrorFunc(ModuleName, moduleErrorTypes, autoThrow)```
@@ -71,7 +72,9 @@ utils.js
 passgen.js
 - PassGen(minPassLen) - default is 6
    - genPass(length, useCaps, useLows, useNums, useSpecial)
-   - genReadablePass()
+	- getCHBSDict(options)
+   - genCHBSPass(options, dict)
+   - scorePassword(pass)
 
 -------------------
 
