@@ -178,15 +178,15 @@ function scorePassword(pass) {
     }
     score += (variationCount - 1) * 10;
 
-    if (score > 80)
+    /*if (score > 80)
         return "strong";
     if (score > 60)
         return "good";
     if (score >= 30)
         return "weak";
-   return "bad";
+   return "bad";*/
+	return score;
 }
-
 
 function _PassGen(/*minPassLen*/) {
    /*if (minPassLen == undefined)
