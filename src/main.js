@@ -1,9 +1,11 @@
-var utils = require('../src/utils.js');
-var passgen = require('../src/passgen.js');
+var utils = require('./utils.js');
+var passgen = require('./passgen.js');
+var launcher = require('./launcher.js');
 
 function _JsCloak() {
    this.utils = utils;
    this.passgen = passgen;
+	this.launcher = launcher;	
 }
 
 var JsCloak = new _JsCloak(); //TODO: we can't pass stuff this way
