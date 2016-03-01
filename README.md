@@ -68,6 +68,7 @@ utils.js
       - foldl
       - foldr
       - fold = foldr
+	- toInt(str)
 
 passgen.js
 - PassGen(minPassLen) - default is 6
@@ -76,6 +77,9 @@ passgen.js
    - genCHBSPass(options, dict)
    - scorePassword(pass)
 
+launcher.js
+	- launch(path, extra_args, on_data, on_error, on_close)
+		- on_data(str), on_error(str), on_close(int)
 -------------------
 
 

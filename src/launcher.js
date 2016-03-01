@@ -15,9 +15,9 @@ function launch(path, cmd_args, on_data, on_error, on_close) {
    if (on_error == null) on_error = (data) => null;
    if (on_close == null) on_close = (code) => null;
 
-   proc.stdout.on('data', (data) => on_data(data));
-   proc.stderr.on('data', (data) => on_error(data));
-   proc.on('close', (code) => on_close(code));
+   proc.stdout.on('data', (data) => on_data(data.toString()));
+   proc.stderr.on('data', (data) => on_error(data.toString()));
+   proc.on('close', (code) => on_close(parseInt(code.toString())));
 }
 
 module.exports.launch = launch;

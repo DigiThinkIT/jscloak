@@ -165,6 +165,9 @@ function foldr_rec(lst, accumulator, combine) {
    return combine(foldr(lst, accumulator, combine), next);
 }
 
+function toInt(s) {
+	return parseInt(s);
+}
 
 function _Utils(randomSeed) {
    if (randomSeed == undefined)
@@ -197,6 +200,7 @@ _Utils.prototype.interlace = interlace;
 _Utils.prototype.foldl = foldl;
 _Utils.prototype.foldr = foldr;
 _Utils.prototype.fold = fold;
+_Utils.prototype.toInt = toInt;
 
 var Utils = new _Utils(); //TODO: we can't pass stuff this way
 
