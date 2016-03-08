@@ -170,6 +170,10 @@ function toInt(s) {
 	return parseInt(s);
 }
 
+function isStr(o) {
+   return typeof o == 'string' || o instanceof String;
+}
+
 function _Utils(randomSeed) {
    if (randomSeed == undefined)
       this.randomSeed = null;

@@ -27,6 +27,8 @@ ICLOAK Common Javascript Tools Library
    - [ ] IE magic if console doesn't exist
 	- [ ] Add strict
    - [ ] Remove browser checks because we use browserify now
+   - [x] Add isStr to utils
+   - [ ] Add isInt, isArr, isObj to utils
   - ideas
    - require.js
    - grunt
@@ -74,6 +76,7 @@ utils.js
       - foldr
       - fold = foldr
 	- toInt(str)
+   - isStr(o)
 
 passgen.js
 - PassGen(minPassLen) - default is 6
