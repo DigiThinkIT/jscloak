@@ -192,6 +192,8 @@ function isObj(o) {
 }
 
 function toJ(jTagOrId, isClass) {
+   if (typeof $ == undefined) //if no jquery
+      $ = () => null;
    if (isStr(jTagOrId)) {
       if (contains(['#', '.'], jTagOrId[0])
          return $(jTagOrId);
