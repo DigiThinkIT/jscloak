@@ -30,3 +30,5 @@
          y = e.pageY;
       });
 
+-credits
+   isFloat http://stackoverflow.com/questions/3885817/how-do-i-check-that-a-number-is-float-or-integer

@@ -27,8 +27,10 @@ ICLOAK Common Javascript Tools Library
    - [ ] IE magic if console doesn't exist
 	- [ ] Add strict
    - [ ] Remove browser checks because we use browserify now
-   - [x] Add isStr to utils
-   - [ ] Add isInt, isArr, isObj to utils
+   - [x] Add toInt, toFloat, isNum, isInt, isFloat, isStr, isArr to utils
+      - [ ] Unit tests
+   - [x] Add toJ and addHtml to utils
+      - [ ] Unit tests
   - ideas
    - require.js
    - grunt
@@ -76,8 +78,15 @@ utils.js
       - foldr
       - fold = foldr
 	- toInt(str)
+   - toFloat(str)
+   - isNum(o)
+   - isInt(o)
+   - isFloat(o)
    - isStr(o)
-
+   - isArr(o)
+   - isObj(o)
+   - toJ(jTagOrId, isClass) => for '#id', 'id' or $('#id') return $('#id')
+   - addHtml(o, html, isClass) 
 passgen.js
 - PassGen(minPassLen) - default is 6
    - genPass(length, useCaps, useLows, useNums, useSpecial)
