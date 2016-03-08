@@ -16,13 +16,18 @@ ICLOAK Common Javascript Tools Library
    - [ ] Make examples
    - [x] sprintf
    - [ ] sprintf argument check
-   - [x] exception system
+   - [ ] exception system
       - [ ] if we throw dict, we don't get error printed, but if we throw string, we can't access error members
+ 		- [ ] Expose internal exception mechanism for external use
+		- [ ] Modify exception stack to work with firefox.
+		- [x] Modules pass default exception handler
+		- [ ] Global exception handler for whole application
    - [x] foldr/foldl
    - [ ] interlace
    - [ ] IE magic if console doesn't exist
 	- [ ] Add strict
-- ideas
+   - [ ] Remove browser checks because we use browserify now
+  - ideas
    - require.js
    - grunt
 
@@ -36,7 +41,7 @@ ICLOAK Common Javascript Tools Library
       - PassGen => ['LenTooShort', 'NoAllowedChars', 'CHBSBadDict', 'CHBSPassLen']
       - Utils   => ['BadRange']
    - for new modules, add custom errors:
-   - ```var throwError = exceptions.getErrorFunc(ModuleName, moduleErrorTypes, autoThrow)```
+   - ```var throwError = exceptions.getErrorFunc(ModuleName, moduleErrorTypes, autoThrow, onExc)```
    - usage in module: throwError('Other', 'error details', true)
    - call it makeError instead of ThrowError if autoThrow is false
    -exceptions.js

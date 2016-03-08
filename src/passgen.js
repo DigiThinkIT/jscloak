@@ -2,7 +2,7 @@ const exceptions = require('../src/exceptions.js')
 const utils = require('../src/utils.js');
 
 var moduleErrorTypes = ['LenTooShort', 'NoAllowedChars', 'CHBSBadDict', 'CHBSPassLen'];
-var throwExc = exceptions.getErrorFunc('PassGen', moduleErrorTypes);
+var throwExc = exceptions.getErrorFunc('PassGen', moduleErrorTypes, true);
 
 var debug = false;
 

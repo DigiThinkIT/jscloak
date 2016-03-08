@@ -1,7 +1,8 @@
 const exceptions = require('../src/exceptions.js');
 
 var moduleErrorTypes = ['BadRange'];
-var throwExc = exceptions.getErrorFunc('Utils', moduleErrorTypes);
+var throwExc = exceptions.getErrorFunc(
+						'Utils', moduleErrorTypes, true);
 
 
 const _utils_exc = require('../src/_utils_exc.js');

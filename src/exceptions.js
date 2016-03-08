@@ -5,13 +5,15 @@ var _contains = _utils_exc._contains
 
 var globalErrors = ['BadApiCall', 'UnsupportedSys'];
 
-function getErrorFunc(moduleName, errorTypes, autoThrow) {
+function getErrorFunc(moduleName, errorTypes, autoThrow, onExc) {
    errorTypes = errorTypes.concat(globalErrors);
 
    if (autoThrow == undefined)
       autoThrow = true;
    if (moduleName == undefined)
       moduleName = 'None';
+   if (onExc == undefined)
+      onExc = () => null; //console.log;
 
    function makeError(errType, msg, shouldThrow) {
       if (!_contains(errorTypes, errType))
@@ -29,10 +31,9 @@ function getErrorFunc(moduleName, errorTypes, autoThrow) {
       }
       if (shouldThrow)
          throw excDict; //excToStr(excDict); //TODO
-      else {
-         console.log(excToStr(excDict));
-         //console.log(stackTrace2());
-      }
+      else
+         console.log(excToStr(excDict)); //console.log(stackTrace2());
+      onExc(excDict);
       return excDict;
    }
    return makeError;
