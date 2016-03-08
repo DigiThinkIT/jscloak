@@ -31,6 +31,7 @@ ICLOAK Common Javascript Tools Library
       - [ ] Unit tests
    - [x] Add toJ and addHtml to utils
       - [ ] Unit tests
+      - [ ] Add check if string doesn't match isClass
   - ideas
    - require.js
    - grunt

@@ -192,10 +192,8 @@ function isObj(o) {
 }
 
 function toJ(jTagOrId, isClass) {
-   if (typeof $ == undefined) //if no jquery
-      $ = () => null;
    if (isStr(jTagOrId)) {
-      if (contains(['#', '.'], jTagOrId[0])
+      if (contains(['#', '.'], jTagOrId[0]))
          return $(jTagOrId);
       else {
          var prepand = '#';
@@ -245,7 +243,7 @@ _Utils.prototype.foldr = foldr;
 _Utils.prototype.fold = fold;
 
 _Utils.prototype.toInt = toInt;
-_Utils.prototype.toFloat = toFlat;
+_Utils.prototype.toFloat = toFloat;
 _Utils.prototype.isNum = isNum;
 _Utils.prototype.isInt = isInt;
 _Utils.prototype.isFloat = isFloat;
