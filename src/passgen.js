@@ -188,6 +188,21 @@ function scorePassword(pass) {
 	return score;
 }
 
+
+//TODO: we using this in new desktop but
+//it's not exposed through package yet
+function getPassStrength(score) {
+   if (score <= 30)
+      return 1;
+   if (score > 80)
+      return 5;
+   if (score > 70)
+      return 4;
+   if (score > 60)
+      return 3;
+   return 2;
+}
+
 function _PassGen(/*minPassLen*/) {
    /*if (minPassLen == undefined)
       this.minPassLen = 10;
