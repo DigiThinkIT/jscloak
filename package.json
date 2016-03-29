@@ -1,6 +1,6 @@
 {
    "name" : "jscloak",
-   "version" : "0.1.0",
+   "version" : "0.1.2",
    "files" : "src",
    "main" : "src/main.js",
    "files" : ["src/passlist.txt", "src", "unitTests", "examples"],

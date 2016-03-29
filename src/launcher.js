@@ -17,7 +17,8 @@ function launch(path, cmd_args, on_data, on_error, on_close) {
 
    proc.stdout.on('data', (data) => on_data(data.toString()));
    proc.stderr.on('data', (data) => on_error(data.toString()));
-   proc.on('close', (code) => on_close(parseInt(code.toString())));
+   proc.on('close', (code) => on_close(code));
+   return proc;
 }
 
 module.exports.launch = launch;
