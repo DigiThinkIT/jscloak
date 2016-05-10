@@ -7,17 +7,18 @@ const spawn = require('child_process').spawn;
         (status) => console.log("exited ${status}")
         );*/
 
-function launch(path, cmd_args, on_data, on_error, on_close) {
+function launch(path, cmd_args, on_data, on_error, on_close, extra_close_arg) {
    const proc = spawn(path, cmd_args);
 
    if (cmd_args == null) cmd_args = [];
    if (on_data == null) on_data = (data) => null;
    if (on_error == null) on_error = (data) => null;
    if (on_close == null) on_close = (code) => null;
+   if (extra_close_arg == null) extra_close_arg = -1;
 
    proc.stdout.on('data', (data) => on_data(data.toString()));
    proc.stderr.on('data', (data) => on_error(data.toString()));
-   proc.on('close', (code) => on_close(code));
+   proc.on('close', (code) => on_close(code, extra_close_arg));
    return proc;
 }
 
