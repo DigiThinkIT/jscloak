@@ -56,44 +56,42 @@ ICLOAK Common Javascript Tools Library
 
 utils.js
 - Utils(randomSeed) - optional value to add to random number generator
-   - isStr(str)
-   - isArr(arr)
-   - map(lst, f)
-   - filter(lst, test)
-   - contains(arr, el)
-   - flatten(arr)
-   - copyArr(arr)
-   - sprintf(format, ...)
+   - map(lst, f) - map function f to lst
+   - filter(lst, test) - filter lst and only return list of elements for which test(element) == true
+   - contains(arr, el) - check if arr contains el
+   - flatten(arr) - flatten([[a, b, c], d, [[e, f, g]]]) => [a, b, c, d, e, f, g]
+   - copyArr(arr) - copy array
+   - sprintf(format, ...) - similar to printf, but to a string
    - ...
-   - getRandom(min, max)
-   - charRange(start, end)
-   - range(start, end, step)
-   - mergeDict(a, b)
-   - contains(arr, el)
-   - sameArray(arr1, arr2, needSort)
-   - repeatArr(arr, num)
-   - shuffleArray(arr, noCopy)
-   - interlace(a, b)
-   - folds(lst, acc, combine) => combine(acc, next)
+   - getRandom(min, max) - get random number in range min to max
+   - charRange(start, end) - character range start with start to end
+   - range(start, end, step) - number range [start, start+step, ..., end]
+   - mergeDict(a, b) - merge 2 dictionaries together
+   - sameArray(arr1, arr2, needSort) - check if arrays elements are equal
+   - repeatArr(arr, num) - repeat array num times (repeatArr([1, 2, 3], 2) => [1, 2, 3, 1, 2, 3])
+   - shuffleArray(arr, noCopy) - randomly move around elements in array
+   - interlace(a, b) - not implemented yet
+   - folds(lst, acc, combine) - fold a list, starting with acc, and using combine function
+      - combine(acc, next) - pass a function which combines acc and next, and returns next acc
       - foldl
       - foldr
       - fold = foldr
-	- toInt(str)
-   - toFloat(str)
-   - isNum(o)
-   - isInt(o)
-   - isFloat(o)
-   - isStr(o)
-   - isArr(o)
-   - isObj(o)
-   - toJ(jTagOrId, isClass) => for '#id', 'id' or $('#id') return $('#id')
-   - addHtml(o, html, isClass) 
+	- toInt(str) - cast string to int
+   - toFloat(str) - cast string to float
+   - isNum(o) - check if number
+   - isInt(o) - check if integer
+   - isFloat(o) - check if float
+   - isStr(str) - check if string
+   - isArr(arr) - check if array
+   - isObj(o) - check if object
+   - toJ(jTagOrId, isClass) - if jTagOrId equals '#id' or 'id' or $('#id') return $('#id')
+   - addHtml(o, html, isClass) - add html data to jquery object o
 passgen.js
-- PassGen(minPassLen) - default is 6
-   - genPass(length, useCaps, useLows, useNums, useSpecial)
+- PassGen(minPassLen) - password generator (default minPassLen is 6)
+   - genPass(length, useCaps, useLows, useNums, useSpecial) - generate password of lenght, useCaps = flag whether to use capital letters, useSpecial = flag whether to use special characters
 	- getCHBSDict(options)
-   - genCHBSPass(options, dict)
-   - scorePassword(pass)
+   - genCHBSPass(options, dict) - generate word password
+   - scorePassword(pass) - check password strength
 
 launcher.js
 	- launch(path, extra_args, on_data, on_error, on_close)
