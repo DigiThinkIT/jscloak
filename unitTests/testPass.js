@@ -54,19 +54,23 @@ function testPassGen() {
    }
    //TODO: varify that it actually
    //throws and give error if it doesn't
+	var thrown = false;
    try {
       testPass(10, false, false, false, false);
    } catch (e) {
       assert(e.module == 'PassGen' && e.err == 'NoAllowedChars');
+		thrown = true;
    }
+	assert(thrown);
+	thrown = false;
    try {
       testPass(5, true, true, true, true);
    } catch (e) {
-      console.log(e);
       assert(e.module == 'PassGen' && e.err == 'LenTooShort');
+		thrown = true;
    }
+	assert(thrown);
 }
 
 testPassGen();
 
-console.log('Unit test passed!');

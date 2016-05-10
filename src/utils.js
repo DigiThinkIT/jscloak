@@ -1,7 +1,8 @@
 const exceptions = require('../src/exceptions.js');
 
 var moduleErrorTypes = ['BadRange'];
-var throwExc = exceptions.getErrorFunc('Utils', moduleErrorTypes);
+var throwExc = exceptions.getErrorFunc(
+						'Utils', moduleErrorTypes, true);
 
 
 const _utils_exc = require('../src/_utils_exc.js');
@@ -165,6 +166,49 @@ function foldr_rec(lst, accumulator, combine) {
    return combine(foldr(lst, accumulator, combine), next);
 }
 
+function toInt(s) {
+	return parseInt(s);
+}
+function toFloat(s) {
+   return parseFloat(s);
+}
+function isNum(o) {
+   return isFinite(o) && !isNaN(o);
+}
+function isInt(o) {
+   return isNum(o) && ((o % 1) === 0);
+}
+function isFloat(o) {
+   return isNum(o) && (n === +n && n !== (n|0));
+}
+function isStr(o) {
+   return typeof o == 'string' || o instanceof String;
+}
+function isArr(o) {
+   return o instanceof Array; //slower Array.isArray(o);
+}
+function isObj(o) {
+   return o != null && typeof o == 'object';
+}
+
+function toJ(jTagOrId, isClass) {
+   if (isStr(jTagOrId)) {
+      if (contains(['#', '.'], jTagOrId[0]))
+         return $(jTagOrId);
+      else {
+         var prepand = '#';
+         if (isClass != undefined && isClass)
+            prepand = '.';
+         return $(prepand + jTagOrId);
+      }
+   }
+   return jTagOrId;
+}
+
+function addHtml(o, html, isClass) {
+   var jTag = toJ(o, isClass);
+   jTag.html(jTag.html() + html);
+}
 
 function _Utils(randomSeed) {
    if (randomSeed == undefined)
@@ -185,7 +229,7 @@ _Utils.prototype.contains = contains;
 _Utils.prototype.flatten = flatten;
 _Utils.prototype.copyArr = copyArr;
 _Utils.prototype.sprintf = sprintf;
-
+//functions defined in this file
 _Utils.prototype.getRandom = getRandom;
 _Utils.prototype.range = range;
 _Utils.prototype.charRange = charRange;
@@ -197,6 +241,19 @@ _Utils.prototype.interlace = interlace;
 _Utils.prototype.foldl = foldl;
 _Utils.prototype.foldr = foldr;
 _Utils.prototype.fold = fold;
+
+_Utils.prototype.toInt = toInt;
+_Utils.prototype.toFloat = toFloat;
+_Utils.prototype.isNum = isNum;
+_Utils.prototype.isInt = isInt;
+_Utils.prototype.isFloat = isFloat;
+_Utils.prototype.isStr = isStr;
+_Utils.prototype.isArr = isArr;
+_Utils.prototype.isObj = isObj;
+_Utils.prototype.toJ = toJ;
+_Utils.prototype.addHtml = addHtml;
+
+
 
 var Utils = new _Utils(); //TODO: we can't pass stuff this way
 
